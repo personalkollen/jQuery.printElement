@@ -20,7 +20,7 @@
     //iframe mode is not supported for opera and chrome 3.0 (it prints the entire page).
     //http://www.google.com/support/forum/p/Webmasters/thread?tid=2cb0f08dce8821c3&hl=en
     if (mainOptions.printMode === 'iframe') {
-      if ($.browser.opera || (/chrome/.test(navigator.userAgent.toLowerCase()))) {
+      if (/chrome/.test(navigator.userAgent.toLowerCase())) {
         mainOptions.printMode = 'popup';
       }
     }
@@ -127,7 +127,7 @@
       //Thanks http://blog.ekini.net/2009/02/24/jquery-getting-the-latest-textvalue-inside-a-textarea/
       var value = $(this).attr('value');
       //fix for issue 7 (http://plugins.jquery.com/node/13503 and http://github.com/erikzaadi/jQueryPlugins/issues#issue/7)
-      if ($.browser.mozilla && this.firstChild) {
+      if (this.firstChild) {
         this.firstChild.textContent = value;
       }
       else {
@@ -174,7 +174,7 @@
     html.push('<base href="' + _getBaseHref() + '" />');
     html.push('</head><body style="' + opts.printBodyOptions.styleToAdd + '" class="' + opts.printBodyOptions.classNameToAdd + '">');
     html.push('<div class="' + $element.attr('class') + '">' + elementHtml + '</div>');
-    html.push('<script type="text/javascript">function printPage(){focus();print();' + ((!$.browser.opera && !opts.leaveOpen && opts.printMode.toLowerCase() === 'popup') ? 'close();' : '') + '}</script>');
+    html.push('<script type="text/javascript">function printPage(){focus();print();' + ((!opts.leaveOpen && opts.printMode.toLowerCase() === 'popup') ? 'close();' : '') + '}</script>');
     html.push('</body></html>');
 
     return html.join('');
