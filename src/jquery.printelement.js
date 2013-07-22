@@ -5,12 +5,12 @@
 *
 *  Home Page : http://projects.erikzaadi/jQuery.printElement
 *  Issues (bug reporting) : http://github.com/erikzaadi/jQuery.printElement/issues
-*  jQuery plugin page : http://plugins.jquery.com/project/printElement 
-*  
+*  jQuery plugin page : http://plugins.jquery.com/project/printElement
+*
 * Dual licensed under the MIT and GPL licenses:
 *   http://www.opensource.org/licenses/mit-license.php
 *   http://www.gnu.org/licenses/gpl.html
-*   
+*
 */
 (function (window, undefined) {
   var document = window.document;
@@ -120,7 +120,7 @@
       $("option", $select).each(function () {
         if ($select.val() === $(this).val()){
           this.setAttribute('selected', 'selected');
-        }   
+        }
       });
     });
     $("textarea", $element).each(function () {
@@ -156,8 +156,9 @@
           if (typeof (current) === 'string') {
             html.push('<link type="text/css" rel="stylesheet" href="' + current + '" >');
           }
-          else  { 
-            html.push('<link type="text/css" rel="stylesheet" href="' + current["href"] + '" media="' + current["media"] + '" >');
+          else  {
+            var media = current["media"] || '';
+            html.push('<link type="text/css" rel="stylesheet" href="' + current["href"] + '" media="' + media + '" >');
           }     }
       }
     }
@@ -165,7 +166,8 @@
       $("link", document).filter(function () {
         return $(this).attr("rel").toLowerCase() === "stylesheet";
       }).each(function () {
-        html.push('<link type="text/css" rel="stylesheet" href="' + $(this).attr("href") + '" media="' + $(this).attr('media') + '" >');
+        var media = $(this).attr('media') || '';
+        html.push('<link type="text/css" rel="stylesheet" href="' + $(this).attr("href") + '" media="' + media + '" >');
       });
     }
     //Ensure that relative links work
