@@ -163,11 +163,15 @@
       }
     }
     else {
-      $("link", document).filter(function () {
-        return $(this).attr("rel").toLowerCase() === "stylesheet";
+      $('script', document).filter(function () {
+      var src = $(this).attr('src');
+        if (src) {
+          return src.toLowerCase().endsWith('.bundle.js');
+        } else {
+          return false;
+        }
       }).each(function () {
-        var media = $(this).attr('media') || '';
-        html.push('<link type="text/css" rel="stylesheet" href="' + $(this).attr("href") + '" media="' + media + '" >');
+        html.push('<script type="text/javascript" src="' + $(this).attr('src') + '"></script>');
       });
     }
     //Ensure that relative links work
